@@ -3,11 +3,11 @@ var path = require('path');
  
 // compile the given c source file and execute it.
 exports.clang = function (srcfile) {
-    // if srcfile = 'main.java'
+    // if srcfile = 'main.c'
     var filename = path.parse(srcfile).name; // main
-    var extension = path.parse(srcfile).ext;  // .java
+    var extension = path.parse(srcfile).ext;  // .c
     if (extension === ".c") {
-        var args_compile = []; //['codec.c', '-o','codec.out']
+        var args_compile = []; // ['main.c', '-o','main.out']
         args_compile[0] = srcfile;
         args_compile[1] = '-o';
         args_compile[2] = filename + '.out';
@@ -15,6 +15,23 @@ exports.clang = function (srcfile) {
         this.execute('gcc', args_compile, cmd_run, []);
     } else {
         console.log(srcfile + " is not a c file.");
+    }
+}
+
+// compile the given c++ source file and execute it.
+exports.cpp = function (srcfile) {
+    // if srcfile = 'main.cpp'
+    var filename = path.parse(srcfile).name; // main
+    var extension = path.parse(srcfile).ext;  // .cpp
+    if (extension === ".cpp") {
+        var args_compile = []; // ['main.cpp', '-o','main']
+        args_compile[0] = srcfile;
+        args_compile[1] = '-o';
+        args_compile[2] = filename;
+        var cmd_run = './'+filename;
+        this.execute('g++', args_compile, cmd_run, []);
+    } else {
+        console.log(srcfile + " is not a cpp file.");
     }
 }
  
@@ -36,8 +53,9 @@ exports.java = function (srcfile) {
  
 // compile source file and execute it.
 exports.execute = function (cmd_compile, args_compile, cmd_run, args_run) {
-    //var compile = spawn('gcc', ['codec.c', '-o','codec.out']);
-    //var compile = spawn('javac', ['CodeJava.java']);
+    // var compile = spawn('gcc', ['main.c', '-o','main.out']);
+    // var compile = spawn('g++', ['main.c', '-o','main']);
+    // var compile = spawn('javac', ['main.java']);
     var compile = spawn(cmd_compile, args_compile);
     compile.stdout.on('data', function (data) {
         console.log('stdout: ' + data);

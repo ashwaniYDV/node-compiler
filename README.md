@@ -1,14 +1,15 @@
 # node-compiler
 
-Running C and Java in Node.js
+Running C, C++ and Java in Node.js
 
 ### Prerequisites
-Install gcc and JDK to compile c and java.
+Install gcc and JDK to compile c, c++ and java.
 
 
 ### Testing
 ```sh
 $ node run_c.js
+$ node run_cpp.js
 $ node run_java.js
 ```
 
