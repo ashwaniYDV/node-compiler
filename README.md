@@ -1,6 +1,6 @@
 # node-compiler
 
-Running C, C++ and Java in Node.js
+Running C, C++ and Java in Node.js using child_process
 
 ### Prerequisites
 Install gcc and JDK to compile c, c++ and java.
